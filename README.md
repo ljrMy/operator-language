@@ -36,4 +36,6 @@ Operator是一门只需要符号编辑的编程语言。
 --------";
 ```
 
+如何下载呢？首先需要有python的环境，然后输入`pip install operator-language`即可，命令为op-lang
+
 目前作者还在改进嵌套循环的代码，敬请期待~
