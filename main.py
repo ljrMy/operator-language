@@ -1,4 +1,5 @@
-import sys
+import argparse
+import os.path
 def runner(code,m=0,n=0):
     out=""
     loop_code=""
@@ -84,22 +85,11 @@ def runner(code,m=0,n=0):
     }
 
 def main():
-    import os.path
-    if len(sys.argv)==1:
-        code=""
-        m=0
-        n=0
-        while 1:
-            char=input()
-            if char=="_":
-                end=runner(code,m=m,n=n)
-                print(end["out"])
-                m=end["m"]
-                n=end["n"]
-            else:
-                code+=char
-    elif len(sys.argv)==2:
-        path=sys.argv[1]
+    parser=argparse.ArgumentParser(description="Welcome to Operator Languages!")
+    parser.add_argument("filepath",help="Please call a file(*.op).",default=None)
+    args=parser.parse_args()
+    if args.filepath:
+        path=args.filepath
         if not os.path.splitext(path)[0][1:]=="op":
             print("Failed...")
         else:
@@ -112,6 +102,15 @@ def main():
             code=code.replace(" ","").replace("\n","").replace("\t","")
             print(runner(code)["out"])
     else:
-        print("Arguments?")
-if __name__=="__main__":
-    main()
+        code=""
+        m=0
+        n=0
+        while 1:
+            char=input()
+            if char=="_":
+                end=runner(code,m=m,n=n)
+                print(end["out"])
+                m=end["m"]
+                n=end["n"]
+            else:
+                code+=char
